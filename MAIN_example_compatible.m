@@ -37,13 +37,14 @@ S2Obj = patch(S2);
 hold off
 axis equal
 axis([-5 5 -5 5 -5 5])
-fig.Children.Visible = 'off'; % Turn off the axis for more pleasant viewing.
-fig.Color = [1 1 1];
+ax = get(fig,'Children');
+set(ax,'Visible','off'); % Turn off the axis for more pleasant viewing.
+set(fig,'Color',[1 1 1]);
 rotate3d on;
 
 %Move them through space arbitrarily.
-S1Coords = S1Obj.Vertices;
-S2Coords = S2Obj.Vertices;
+S1Coords = get(S1Obj,'Vertices');
+S2Coords = get(S2Obj,'Vertices');
 
 S1Rot = eye(3,3); % Accumulate angle changes
 
@@ -79,8 +80,8 @@ for i = 3:-0.01:0.2;
     S1Rot = S1RotDiff*S1Rot;
     S2Rot = S2RotDiff*S2Rot;
     
-    S1Obj.Vertices = (S1Rot*S1Coords')' + i;
-    S2Obj.Vertices = (S2Rot*S2Coords')' + -i;
+    set(S1Obj,'Vertices',(S1Rot*S1Coords')' + i);
+    set(S2Obj,'Vertices',(S2Rot*S2Coords')' + -i);
     
     % Do collision detection
     collisionFlag = GJK(S1Obj,S2Obj,iterationsAllowed);
