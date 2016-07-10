@@ -198,7 +198,7 @@ dotted = XData*v(1) + YData*v(2) + ZData*v(3);
 [maxInCol,rowIdxSet] = max(dotted);
 [maxInRow,colIdx] = max(maxInCol);
 rowIdx = rowIdxSet(colIdx);
-point = [shape.XData(rowIdx,colIdx), shape.YData(rowIdx,colIdx), shape.ZData(rowIdx,colIdx)];
+point = [XData(rowIdx,colIdx), YData(rowIdx,colIdx), ZData(rowIdx,colIdx)];
 end
 
 function point = support(shape1,shape2,v)
