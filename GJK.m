@@ -155,7 +155,7 @@ for i = 1:IterationAllowed %Allowing 10 tries to make a good tetrahedron.
             ab = ac;
             ac = ad;            
             abc = acd;     
-        else
+        elseif dot(acd, ao) < 0
             adb = cross(ad,ab);%Normal to face of triangle
             
             if dot(adb, ao) > 0 %Above triangle ADB
@@ -191,9 +191,9 @@ end
 
 function point = getFarthestInDir(shape, v)
 %Find the furthest point in a given direction for a shape
-XData = get(shape,'XData'); % Making it more compatible with previous MATLAB releases.
-YData = get(shape,'YData');
-ZData = get(shape,'ZData');
+XData = getfield(shape,'XData'); % Making it more compatible with previous MATLAB releases.
+YData = getfield(shape,'YData');
+ZData = getfield(shape,'ZData');
 dotted = XData*v(1) + YData*v(2) + ZData*v(3);
 [maxInCol,rowIdxSet] = max(dotted);
 [maxInRow,colIdx] = max(maxInCol);
