@@ -155,7 +155,7 @@ for i = 1:IterationAllowed %Allowing 10 tries to make a good tetrahedron.
             ab = ac;
             ac = ad;            
             abc = acd;     
-        else
+        elseif dot(acd, ao) < 0
             adb = cross(ad,ab);%Normal to face of triangle
             
             if dot(adb, ao) > 0 %Above triangle ADB
